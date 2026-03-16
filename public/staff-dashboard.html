@@ -1,0 +1,22 @@
+<div class="stat-card">
+    <h3>My Profile</h3>
+    <p style="font-size: 16px;">Role: Senior Staff</p>
+    <div id="cl-section" style="margin-top:10px;">
+        <span style="font-weight:bold;">Available CL: </span>
+        <button id="cl-count" onclick="openLeaveForm()" style="background:#d35400; color:#fff; border:none; padding:5px 10px; cursor:pointer; border-radius:3px;">3</button>
+    </div>
+</div>
+
+<div id="leaveModal" class="modal" style="display:none; position:fixed; background:rgba(0,0,0,0.5); width:100%; height:100%; top:0; left:0; z-index:10000;">
+    <div style="background:#fff; width:350px; margin:10% auto; padding:20px; border-radius:8px;">
+        <h3>Apply for Leave</h3>
+        <form onsubmit="submitLeave(event)">
+            <div class="input-group">
+                <label>Reason</label>
+                <textarea id="leaveReason" required style="width:100%; height:80px;"></textarea>
+            </div>
+            <button type="submit" class="login-submit-btn">Submit to Manager</button>
+            <button type="button" onclick="closeLeaveForm()" style="background:#ccc; border:none; padding:10px; width:100%; margin-top:5px;">Cancel</button>
+        </form>
+    </div>
+</div>

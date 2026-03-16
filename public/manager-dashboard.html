@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Manager Dashboard</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        .request-card { background: white; padding: 15px; margin: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-left: 5px solid #f39c12; }
+        .btn-acc { background: #27ae60; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+        .btn-dec { background: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+    </style>
+</head>
+<body onload="displayManagerRequests()">
+    <h2>Manager Approval Portal</h2>
+    <div id="requestList"></div>
+
+    <script>
+        function displayManagerRequests() {
+            let requests = JSON.parse(localStorage.getItem('leaveRequests')) || [];
+            let container = document.getElementById('requestList');
+            container.innerHTML = "";
+
+            // Sudhu 'Pending_Manager' status gulo dekhabe
+            requests.forEach((req, index) => {
+                if(req.status === 'Pending_Manager') {
+                    container.innerHTML += `
+                        <div class="request-card">
+                            <p><strong>Staff Email:</strong> ${req.staffEmail}</p>
+                            <p><strong>Reason:</strong> ${req.reason}</p>
+                            <button class="btn-acc" onclick="manage(1, ${req.id})">Forward to HR</button>
+                            <button class="btn-dec" onclick="manage(0, ${req.id})">Decline</button>
+                        </div>`;
+                }
+            });
+        }
+
+        function manage(action, id) {
+            let requests = JSON.parse(localStorage.getItem('leaveRequests'));
+            let reqIndex = requests.findIndex(r => r.id === id);
+
+            if(action === 1) {
+                requests[reqIndex].status = 'Pending_HR';
+                alert("Forwarded to HR!");
+            } else {
+                let msg = prompt("Decline Reason:");
+                requests[reqIndex].status = 'Declined';
+                requests[reqIndex].declineReason = msg;
+            }
+            localStorage.setItem('leaveRequests', JSON.stringify(requests));
+            displayManagerRequests();
+        }
+    </script>
+</body>
+</html>

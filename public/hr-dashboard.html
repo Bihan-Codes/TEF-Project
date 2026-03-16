@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .hr-card { background: white; padding: 15px; margin: 10px; border-radius: 8px; border-left: 5px solid #2980b9; }
+    </style>
+</head>
+<body onload="displayHRRequests()">
+    <h2>HR Final Approval Portal</h2>
+    <div id="hrRequestList"></div>
+
+    <script>
+        function displayHRRequests() {
+            let requests = JSON.parse(localStorage.getItem('leaveRequests')) || [];
+            let container = document.getElementById('hrRequestList');
+            container.innerHTML = "";
+
+            requests.forEach((req) => {
+                if(req.status === 'Pending_HR') {
+                    container.innerHTML += `
+                        <div class="hr-card">
+                            <p><strong>From Manager (Staff: ${req.staffEmail})</strong></p>
+                            <p>Reason: ${req.reason}</p>
+                            <button onclick="finalAction(1, ${req.id})">Final Approve</button>
+                            <button onclick="finalAction(0, ${req.id})">Decline</button>
+                        </div>`;
+                }
+            });
+        }
+
+        function finalAction(action, id) {
+            let requests = JSON.parse(localStorage.getItem('leaveRequests'));
+            let reqIndex = requests.findIndex(r => r.id === id);
+
+            if(action === 1) {
+                requests[reqIndex].status = 'Final_Accepted';
+                alert("Staff informed: Leave Approved!");
+            } else {
+                let msg = prompt("HR Decline Reason:");
+                requests[reqIndex].status = 'Declined';
+                requests[reqIndex].declineReason = msg;
+            }
+            localStorage.setItem('leaveRequests', JSON.stringify(requests));
+            displayHRRequests();
+        }
+    </script>
+</body>
+</html>
