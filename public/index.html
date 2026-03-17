@@ -1,300 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trijal Excelled Foundation | TEF</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>TEF Login</title>
+
+    <style>
+        body { font-family: Arial; margin: 0; }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #333;
+            color: white;
+        }
+
+        .top-links a {
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            margin: 10% auto;
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="top-header">
-        <div class="contact-info">
-            <span><i class="fas fa-phone-alt"></i> 0324-4465024 / 8250244283</span>
-            <span><i class="fas fa-envelope"></i> admin@trijalexcelled.com</span>
-        </div>
-        <div class="top-links">
-            <a href="#" id="loginBtn"><i class="fas fa-user-circle"></i> Admin / Login</a>
-            <a href="#" class="btn-donate"><i class="fas fa-hand-holding-heart"></i> Donate Now</a>
-        </div>
+<!-- HEADER -->
+<div class="top-header">
+    <div>📞 0324-4465024</div>
+    <div class="top-links">
+        <a id="loginBtn">Login</a>
     </div>
-
-    <header class="main-header" id="navbar">
-        <div class="logo-section">
-            <img src="images/t1.jpg" alt="TEF Logo" class="site-logo">
-            <div class="logo-text">
-                <h1>TRIJAL EXCELLED FOUNDATION</h1>
-                <p>"Voices for vision, Hands for Humanity"</p>
-            </div>
-        </div>
-
-        <nav class="nav-menu">
-            <ul class="nav-links">
-                <li><a href="index.html"><i class="fas fa-home"></i> Home ▼</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="overview.html">Overview</a></li>
-                        <li><a href="vision.html">Vision Mission Objective</a></li>
-                        <li><a href="#">Goals</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">About Us ▼</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="vision.html">Our Vision</a></li>
-                        <li><a href="mission.html">Our Mission</a></li>
-                        <li><a href="history.html">Company History</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">What We Do ▼</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Women Empowerment</a></li>
-                        <li><a href="#">Environmental Sustainability</a></li>
-                        <li><a href="#">Humanitarian Support</a></li>
-                        <li><a href="#">Education & Skill Development</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">Team ▼</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="faculty.html">Faculty</a></li>
-                        <li><a href="#">Admission</a></li>
-                        <li><a href="#">Placement Coordinator</a></li>
-                        <li><a href="#">Manager</a></li>
-                    </ul>
-                </li>
-                <li><a href="career.html">Careers</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="team-section">
-        <h2 class="section-title">MEET OUR LEADERSHIP</h2>
-        <div class="card-container">
-            <div class="team-card">
-                <div class="card-image-box"><img src="images/ceo.jpg" alt="Mr. Subhajit Pal"></div>
-                <div class="card-info">
-                    <div class="card-header-blue">
-                        <h3>MR. SUBHAJIT PAL</h3>
-                    </div>
-                    <div class="card-header-orange">
-                        <p>CEO</p>
-                    </div>
-                    <div class="company-logo">
-                        <h4>TEF</h4>
-                        <p>INDIA</p>
-                    </div>
-                </div>
-            </div>
-            <div class="team-card">
-                <div class="card-image-box"><img src="images/admin.jpg" alt="Rahul Mondal"></div>
-                <div class="card-info">
-                    <div class="card-header-blue">
-                        <h3>RAHUL MONDAL</h3>
-                    </div>
-                    <div class="card-header-orange">
-                        <p>Admin & Finance</p>
-                    </div>
-                    <div class="company-logo">
-                        <h4>TEF</h4>
-                        <p>INDIA</p>
-                    </div>
-                </div>
-            </div>
-            <div class="team-card">
-                <div class="card-image-box"><img src="images/pm.jpg" alt="Mousumi Roy"></div>
-                <div class="card-info">
-                    <div class="card-header-blue">
-                        <h3>MOUSUMI ROY</h3>
-                    </div>
-                    <div class="card-header-orange">
-                        <p>Project Manager</p>
-                    </div>
-                    <div class="company-logo">
-                        <h4>TEF</h4>
-                        <p>INDIA</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="gallery-section" id="gallery">
-        <h2 class="section-title">OUR GALLERY & CLASSES</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="images/class1.jpg" alt="TEF Classroom">
-                <div class="gallery-overlay"><span>Skill Training Class</span></div>
-            </div>
-            <div class="gallery-item"><img src="images/class2.jpg" alt="Computer Lab">
-                <div class="gallery-overlay"><span>Practical Session</span></div>
-            </div>
-            <div class="gallery-item"><img src="images/class3.jpg" alt="Student Project">
-                <div class="gallery-overlay"><span>Student Project Work</span></div>
-            </div>
-            <div class="gallery-item"><img src="images/class4.jpg" alt="Seminars">
-                <div class="gallery-overlay"><span>Seminars & Events</span></div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-col">
-                <h3>TEF</h3>
-                <p>"Voices for vision, Hands for Humanity"</p>
-                <p>Trijal Excelled Foundation is dedicated to transforming lives through skill development, education,
-                    and employment support.</p>
-            </div>
-            <div class="footer-col">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="vision.html">Our Vision & Mission</a></li>
-                    <li><a href="history.html">Company History</a></li>
-                    <li><a href="career.html">Careers</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Plot No 314/382, Arjunpur, Angadpur, Durgapur, Paschim
-                    Barddhaman, West Bengal, 713215</p>
-                <p><i class="fas fa-phone-alt"></i> 0324-4465024 / 8250244283</p>
-                <p><i class="fas fa-envelope"></i> admin@trijalexcelled.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Trijal Excelled Foundation (TEF). All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-
-            <div class="tab-box">
-                <button class="tab-btn active" onclick="openTab('login-tab')">Login</button>
-                <button class="tab-btn" onclick="openTab('register-tab')">Register</button>
-            </div>
-
-            <div id="login-tab" class="tab-content active-content">
-                <h2 class="modal-title">Welcome Back</h2>
-                <form id="loginForm">
-                    <div class="input-group">
-                        <label>Login As</label>
-                        <select id="loginRole" required>
-                            <option value="" disabled selected>Select Your Role</option>
-                            <option value="staff">Staff Member</option>
-                            <option value="hr">Human Resource (HR)</option>
-                            <option value="admin">Administrator</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Email Address</label>
-                        <input type="email" placeholder="Enter your email" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password" placeholder="Enter password" required>
-                    </div>
-                    <button type="submit" class="login-submit-btn">Login Now</button>
-                </form>
-            </div>
-
-            <div id="register-tab" class="tab-content">
-                <h2 class="modal-title">Create Account</h2>
-                <form id="registerForm">
-                    <div class="input-group">
-                        <label>Staff ID (Auto-Generated)</label>
-                        <input type="text" id="staffId" style="background: #e9ecef;" readonly>
-                    </div>
-                    <div class="input-group">
-                        <label>Select Your Role</label>
-                        <select id="regRole" required>
-                            <option value="staff">Staff Member</option>
-                            <option value="hr">Human Resource (HR)</option>
-                            <option value="admin">Administrator</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Designation</label>
-                        <select id="designation" required>
-                            <option value="">Select Designation</option>
-                            <option value="Manager">Manager</option>
-                            <option value="Coordinator">Coordinator</option>
-                            <option value="Faculty">Faculty</option>
-                            <option value="Office Staff">Office Staff</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Department</label>
-                        <select id="department" required>
-                            <option value="">Select Department</option>
-                            <option value="Education">Education</option>
-                            <option value="IT">IT & Skill</option>
-                            <option value="Humanitarian">Humanitarian</option>
-                            <option value="Finance">Finance</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Gmail Address</label>
-                        <div class="otp-container">
-                            <input type="email" id="regEmail" placeholder="example@gmail.com" required>
-                            <button type="button" class="send-otp-btn">Send OTP</button>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label>Gmail OTP</label>
-                        <input type="text" id="otpInput" placeholder="6-digit OTP" maxlength="6"
-                            oninput="autoVerifyOTP()" required>
-                        <p id="otpStatus" style="font-weight:bold; margin-top:5px; font-size:13px;"></p>
-                    </div>
-                    <div class="input-group">
-    <label>Phone Number</label>
-    <input type="tel" id="regPhone" placeholder="Enter 10 digit mobile number" required>
 </div>
 
-<div class="input-group">
-    <label><i class="fas fa-file-alt"></i> Supporting Documents (PDF/Images)</label>
-    <input type="file" id="supportingDocs" name="supportingDocs" accept=".pdf, image/*" multiple required>
-    <small style="color: #666; font-size: 11px;">*You can select multiple files (Aadhar, PAN, CV etc.)</small>
-</div>
-                    <div class="input-group">
-                        <label>Full Address</label>
-                        <textarea id="address" rows="2" placeholder="Full Address" required></textarea>
-                    </div>
-                    <div class="input-group">
-                        <label>Passport Photo</label>
-                        <input type="file" id="passportPhoto" accept="image/*" required>
-                    </div>
-                    <div class="input-group">
-                        <label><i class="fas fa-file-upload"></i> Personal Documents (PDF/Images)</label>
-                        <input type="file" id="supportingDocs" name="supportingDocs" accept=".pdf, image/*" multiple
-                            required>
-                        <small style="color: #666; font-size: 11px; display: block; margin-top: 5px;">
-                            *u can select documents, photos, and certificates (PDF or image) at the same time..
-                        </small>
-                    </div>
-                    <div class="input-group">
-                        <label>Create Password</label>
-                        <input type="password" id="createPass" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Confirm Password</label>
-                        <input type="password" id="confirmPass" onkeyup="checkPasswordMatch()" required>
-                        <p id="passError" style="display: none; color: red; font-size: 12px;">Password not same!</p>
-                    </div>
-                    <button type="submit" class="login-submit-btn">Register Now</button>
-                </form>
-            </div>
-        </div>
-    </div>
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
 
-    <script src="script.js"></script>
+        <h2>Login</h2>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+                <label>Role</label>
+                <select id="loginRole" required>
+                    <option value="">Select Role</option>
+                    <option value="staff">Staff</option>
+                    <option value="hr">HR</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+
+            <button type="submit">Login</button>
+
+        </form>
+    </div>
+</div>
+
+<script>
+
+// OPEN MODAL
+document.getElementById("loginBtn").addEventListener("click", function () {
+    document.getElementById("loginModal").style.display = "block";
+});
+
+// CLOSE MODAL
+document.querySelector(".close-btn").addEventListener("click", function () {
+    document.getElementById("loginModal").style.display = "none";
+});
+
+// CLOSE ON OUTSIDE CLICK
+window.onclick = function (event) {
+    const modal = document.getElementById("loginModal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+};
+
+// LOGIN FUNCTION
+document.getElementById("loginForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+    const role = document.getElementById("loginRole").value;
+
+    try {
+        const res = await fetch("http://localhost:5000/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                gmail: email,
+                password: password
+            })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            alert("Login Successful");
+
+            localStorage.setItem("user", JSON.stringify(data.user));
+
+            window.location.href = "dashboard.html";
+        } else {
+            alert(data.message);
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Server Error");
+    }
+});
+
+</script>
+
 </body>
-
 </html>
