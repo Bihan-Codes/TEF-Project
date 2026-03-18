@@ -1,6 +1,6 @@
-require("dotenv").config({path : "docs.env"});
+require("dotenv").config()
 
-const mysql = require("mysql2");
+const mysql = require("mysql2")
 
 const db = mysql.createConnection({
   host: process.env.MYSQLHOST,
