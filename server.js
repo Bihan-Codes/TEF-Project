@@ -99,7 +99,7 @@ app.post('/verify-otp', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT,"0.0.0.0", () => {
     console.log(`Server Started on port ${PORT}`);
 });
 
