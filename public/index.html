@@ -1,176 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEF Login</title>
-
-    <style>
-        body { font-family: Arial; margin: 0; }
-
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background: #333;
-            color: white;
-        }
-
-        .top-links a {
-            color: white;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-        }
-
-        .modal-content {
-            background: white;
-            padding: 20px;
-            margin: 10% auto;
-            width: 300px;
-            border-radius: 10px;
-        }
-
-        .close-btn {
-            float: right;
-            cursor: pointer;
-            font-size: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 10px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 8px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background: blue;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+    <title>Trijal Excelled Foundation | TEF</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="top-header">
-    <div>📞 0324-4465024</div>
-    <div class="top-links">
-        <a id="loginBtn">Login</a>
+    <div class="top-header">
+        <div class="contact-info">
+            <span><i class="fas fa-phone-alt"></i> 0324-4465024 / 8250244283</span>
+            <span><i class="fas fa-envelope"></i> admin@trijalexcelled.com</span>
+        </div>
+        <div class="top-links">
+            <a href="#" id="loginBtn"><i class="fas fa-user-circle"></i> Admin / Login</a>
+            <a href="#" class="btn-donate"><i class="fas fa-hand-holding-heart"></i> Donate Now</a>
+        </div>
     </div>
-</div>
 
-<!-- LOGIN MODAL -->
-<div id="loginModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn">&times;</span>
+    <header class="main-header" id="navbar">
+        <div class="logo-section">
+            <img src="images/t1.jpg" alt="TEF Logo" class="site-logo">
+            <div class="logo-text">
+                <h1>TRIJAL EXCELLED FOUNDATION</h1>
+                <p>"Voices for vision, Hands for Humanity"</p>
+            </div>
+        </div>
 
-        <h2>Login</h2>
+        <nav class="nav-menu">
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="overview.html">Overview</a></li>
+                        <li><a href="vision.html">Vision Mission Objective</a></li>
+                        <li><a href="#">Goals</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">About Us ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="vision.html">Our Vision</a></li>
+                        <li><a href="mission.html">Our Mission</a></li>
+                        <li><a href="history.html">Company History</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">What We Do ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Women Empowerment</a></li>
+                        <li><a href="#">Environmental Sustainability</a></li>
+                        <li><a href="#">Humanitarian Support</a></li>
+                        <li><a href="#">Education & Skill Development</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Team ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="faculty.html">Faculty</a></li>
+                        <li><a href="#">Admission</a></li>
+                        <li><a href="#">Placement Coordinator</a></li>
+                        <li><a href="#">Manager</a></li>
+                    </ul>
+                </li>
+                <li><a href="career.html">Careers</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <form id="loginForm">
+    <section class="team-section">
+        <h2 class="section-title">MEET OUR LEADERSHIP</h2>
+        <div class="card-container">
+            <div class="team-card">
+                <div class="card-image-box"><img src="images/ceo.jpg"></div>
+                <div class="card-info">
+                    <div class="card-header-blue"><h3>MR. SUBHAJIT PAL</h3></div>
+                    <div class="card-header-orange"><p>CEO</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="input-group">
-                <label>Role</label>
-                <select id="loginRole" required>
-                    <option value="">Select Role</option>
-                    <option value="staff">Staff</option>
-                    <option value="hr">HR</option>
-                    <option value="admin">Admin</option>
-                </select>
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+
+            <div id="login-tab" class="tab-content active-content">
+                <h2 class="modal-title">Welcome Back</h2>
+                <form id="loginForm">
+
+                    <div class="input-group">
+                        <label>Login As</label>
+                        <select id="loginRole" required>
+                            <option value="" disabled selected>Select Your Role</option>
+                            <option value="staff">Staff</option>
+                            <option value="hr">HR</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <!-- ✅ FIXED -->
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <!-- ✅ FIXED -->
+                        <input type="password" id="loginPassword" placeholder="Enter password" required>
+                    </div>
+
+                    <button type="submit">Login Now</button>
+                </form>
             </div>
 
-            <div class="input-group">
-                <label>Email</label>
-                <input type="email" id="loginEmail" required>
-            </div>
-
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="loginPassword" required>
-            </div>
-
-            <button type="submit">Login</button>
-
-        </form>
+        </div>
     </div>
-</div>
 
-<script>
+    <!-- ================= SCRIPT ================= -->
+    <script>
 
-// OPEN MODAL
-document.getElementById("loginBtn").addEventListener("click", function () {
-    document.getElementById("loginModal").style.display = "block";
-});
+    document.getElementById("loginBtn").addEventListener("click", function () {
+        document.getElementById("loginModal").style.display = "block";
+    });
 
-// CLOSE MODAL
-document.querySelector(".close-btn").addEventListener("click", function () {
-    document.getElementById("loginModal").style.display = "none";
-});
-
-// CLOSE ON OUTSIDE CLICK
-window.onclick = function (event) {
-    const modal = document.getElementById("loginModal");
-    if (event.target === modal) {
-        modal.style.display = "none";
+    function closeModal() {
+        document.getElementById("loginModal").style.display = "none";
     }
-};
 
-// LOGIN FUNCTION
-document.getElementById("loginForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    const role = document.getElementById("loginRole").value;
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
 
-    try {
-        const res = await fetch("http://localhost:5000/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                gmail: email,
-                password: password
-            })
-        });
+        try {
+            const res = await fetch("http://localhost:5000/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    gmail: email,
+                    password: password
+                })
+            });
 
-        const data = await res.json();
+            const data = await res.json();
 
-        if (res.ok) {
-            alert("Login Successful");
+            if (res.ok) {
+                alert("Login Successful");
+                localStorage.setItem("user", JSON.stringify(data.user));
+                window.location.href = "dashboard.html";
+            } else {
+                alert(data.message);
+            }
 
-            localStorage.setItem("user", JSON.stringify(data.user));
-
-            window.location.href = "dashboard.html";
-        } else {
-            alert(data.message);
+        } catch (error) {
+            console.error(error);
+            alert("Server Error");
         }
+    });
 
-    } catch (error) {
-        console.error(error);
-        alert("Server Error");
-    }
-});
-
-</script>
+    </script>
 
 </body>
 </html>
