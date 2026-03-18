@@ -14,6 +14,10 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname,'public')))
 
+app.get("/", (req, res) => {
+    res.send("Server is running 🚀");
+});
+
 const loginRoute = require('./api/login_api')
 
 app.use(express.json())
