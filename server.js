@@ -2,58 +2,62 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path')
+const path = require('path');
 
-const db = require("./db").promise()
+// 🔥 CRASH PROTECTION
+process.on('uncaughtException', err => {
+    console.error("UNCAUGHT:", err);
+});
 
-require ("dotenv").config()
+process.on('unhandledRejection', err => {
+    console.error("UNHANDLED:", err);
+});
+
+// 🔥 DB CONNECTION
+const db = require("./db");
 
 const app = express();
-app.use(cors()); 
+
+// 🔥 MIDDLEWARE (CLEAN ORDER)
+app.use(cors());
+app.use(express.json());
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname,'public')))
+// 🔥 STATIC FILES
+app.use(express.static(path.join(__dirname, 'public')));
 
+// 🔥 ROOT ROUTE (IMPORTANT FOR RAILWAY)
 app.get("/", (req, res) => {
     res.send("Server is running 🚀");
 });
 
-const loginRoute = require('./api/login_api')
+// 🔥 ROUTES
+const loginRoute = require('./api/login_api');
+app.use('/api', loginRoute);
 
-app.use(express.json())
-
-app.use('/api',loginRoute)
-
-
-
-
-// 1. Gmail Configuration (Notun Password diye update kora hoyeche)
+// ================= EMAIL CONFIG =================
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
-    secure: true, 
+    secure: true,
     auth: {
-        user: 'tittu318@gmail.com', 
-        pass: 'zhzmekcqziwhcdoo' // Tomar notun App Password ekhane bosiye dilam
+        user: 'tittu318@gmail.com',
+        pass: 'zhzmekcqziwhcdoo'
     },
     tls: {
-        rejectUnauthorized: false 
+        rejectUnauthorized: false
     }
 });
 
+// ================= OTP STORAGE =================
 let otpStorage = {};
 
-// 2. FRESH OTP Route
+// ================= SEND EMAIL OTP =================
 app.post('/send-otp', (req, res) => {
     const { email } = req.body;
-    
+
     if (!email) {
         return res.status(400).json({ message: "Email is required!" });
-    }
-
-    // Purono OTP delete kora jate bar bar notun code generate hoy
-    if (otpStorage[email]) {
-        delete otpStorage[email];
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
@@ -62,88 +66,65 @@ app.post('/send-otp', (req, res) => {
     const mailOptions = {
         from: '"Trijal Foundation" <tittu318@gmail.com>',
         to: email,
-        subject: 'Trijal Foundation - Fresh Verification OTP',
+        subject: 'Verification OTP',
         html: `
-            <div style="font-family: Arial, sans-serif; padding: 20px; border: 2px solid #1f3a93; border-radius: 10px; max-width: 400px;">
-                <h2 style="color: #1f3a93; text-align: center;">Verification OTP</h2>
-                <hr>
-                <p>Registration-er jonno tomar notun verification code holo:</p>
-                <div style="text-align: center; margin: 20px 0;">
-                    <h1 style="color: #d35400; background: #f0f0f0; padding: 15px; display: inline-block; letter-spacing: 5px; border-radius: 5px;">${otp}</h1>
-                </div>
-                <p style="font-size: 12px; color: #666; text-align: center;">Ei code-ta shudhu ekhonkar jonno valid. Abar click korle purono code kaaj korbe na.</p>
+            <div style="font-family: Arial; padding: 20px;">
+                <h2>Verification OTP</h2>
+                <h1>${otp}</h1>
+                <p>This OTP is valid for one time use only.</p>
             </div>
         `
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, (error) => {
         if (error) {
-            console.log("Detailed Error:", error);
-            return res.status(500).json({ message: "Error: Mail pathano jayni!" });
+            console.error("Mail Error:", error);
+            return res.status(500).json({ message: "Failed to send OTP" });
         }
-        console.log("OTP Sent: " + otp + " to " + email);
-        res.status(200).json({ message: "Notun OTP safolvabe pathano hoyeche." });
+        console.log(`OTP Sent to ${email}: ${otp}`);
+        res.json({ message: "OTP sent successfully" });
     });
 });
 
-// 3. Verify OTP Route
+// ================= VERIFY EMAIL OTP =================
 app.post('/verify-otp', (req, res) => {
     const { email, otp } = req.body;
+
     if (otpStorage[email] && otpStorage[email] === otp) {
         delete otpStorage[email];
-        res.status(200).json({ message: "Verification Successful!" });
-    } else {
-        res.status(400).json({ message: "Invalid or Expired OTP!" });
+        return res.json({ message: "Verified" });
     }
+
+    res.status(400).json({ message: "Invalid OTP" });
 });
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT,"0.0.0.0", () => {
-    console.log(`Server Started on port ${PORT}`);
-});
-
-// OTP Verify Route
-app.post('/verify-otp', (req, res) => {
-    const { email, otp } = req.body;
-
-    // Storage theke check korche
-    if (otpStorage[email] && otpStorage[email] === otp) {
-        // success holeo ekhon delete korlam na jate tumi test korte paro
-        res.status(200).json({ message: "Verified" });
-    } else {
-        res.status(400).json({ message: "Invalid OTP" });
-    }
-});
-app.post('/verify-phone-otp', (req, res) => {
-    const { phone, otp } = req.body;
-    
-    // Ekhane email-er motoi phone storage theke check hobe
-    if (otpStorage[phone] && otpStorage[phone] === otp) {
-        res.status(200).json({ message: "Phone Verified" });
-    } else {
-        res.status(400).json({ message: "Invalid Phone OTP" });
-    }
-});
-// Phone OTP Pathanor Route
+// ================= SEND PHONE OTP =================
 app.post('/send-phone-otp', (req, res) => {
     const { phone } = req.body;
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    
-    otpStorage[phone] = otp; 
 
-    // ASOL SMS Gateway ekhon nei, tai Terminal-e print hobe
-    console.log(`>>> OTP for Phone ${phone} is: ${otp} <<<`); 
-    
-    res.status(200).json({ message: "OTP sent! Check VS Code Terminal for the code." });
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    otpStorage[phone] = otp;
+
+    console.log(`OTP for ${phone}: ${otp}`);
+
+    res.json({ message: "OTP sent (check server logs)" });
 });
 
-// Phone OTP Verify Route
+// ================= VERIFY PHONE OTP =================
 app.post('/verify-phone-otp', (req, res) => {
     const { phone, otp } = req.body;
+
     if (otpStorage[phone] && otpStorage[phone] === otp) {
-        res.status(200).json({ message: "Phone Verified" });
-    } else {
-        res.status(400).json({ message: "Invalid OTP" });
+        delete otpStorage[phone];
+        return res.json({ message: "Phone Verified" });
     }
+
+    res.status(400).json({ message: "Invalid OTP" });
+});
+
+// ================= START SERVER =================
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server Started on port ${PORT}`);
 });
