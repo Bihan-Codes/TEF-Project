@@ -158,7 +158,7 @@
             if (res.ok) {
                 alert("Login Successful");
                 localStorage.setItem("user", JSON.stringify(data.user));
-                window.location.href = "dashboard.html";
+                window.location.href = "/public/staff-dashboard.html";
             } else {
                 alert(data.message);
             }
